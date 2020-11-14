@@ -95,4 +95,16 @@ accelerateMedian <- median(accelerateVector)
 # Median : Year
 yearMedian <- median(yearVector)
 
+# Calculating the variance
+# To calculate variance, subtract the mean from each observation
 
+# Variance : Mpg (unbiased)
+mpgVariance <- var(mpgVariance)
+
+# Variance : Cylinders (unbiased)
+cylindersVariance <- var(cylindersVariance)
+
+# Variance : Displacement (unbiased)
+displacementVariance <- var(displacementVariance)
+
+# Variance : Horsepower
