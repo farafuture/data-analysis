@@ -102,9 +102,21 @@ yearMedian <- median(yearVector)
 mpgVariance <- var(mpgVariance)
 
 # Variance : Cylinders (unbiased)
-cylindersVariance <- var(cylindersVariance)
+cylindersVariance <- var(cylindersVector)
 
 # Variance : Displacement (unbiased)
-displacementVariance <- var(displacementVariance)
+displacementVariance <- var(displacementVector)
 
 # Variance : Horsepower
+horsepowerVariance <- var(horsepowerVector)
+
+# Variance : Weight
+weightVariance <- var(weightVector)
+
+# Variance : Acceleration
+accelerateVariance <- var(accelerateVector)
+
+# Variance : Year
+yearVariance <- var(yearVector)
+
+# (d) : Removing observations 11th to 79th
