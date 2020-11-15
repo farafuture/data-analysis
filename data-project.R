@@ -46,6 +46,7 @@ names(Auto)
 # Range of mpg
 mpgVector <- Auto['mpg']
 rangeOfMpg <- range(mpgVector)
+?data.frame
 
 # Range of Cylinders
 cylindersVector <- Auto['cylinder']
@@ -120,3 +121,30 @@ accelerateVariance <- var(accelerateVector)
 yearVariance <- var(yearVector)
 
 # (d) : Removing observations 11th to 79th
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Linear regression
+
+# (a) Use lm()
+
+#result <- lm(Auto[mpg] ~ Auto[acceleration])
+#summary(result)
+mpgVector <- unlist(mpgVector, recursive = TRUE, use.names = TRUE)
+accelerateVector <- unlist(accelerateVector, recursive = TRUE, use.names = TRUE)
+accMpg <- data.frame(mpgVector, accelerateVector)
+lm.fit <- lm(mpgVector ~ accelerateVector, accMpg)
+lm.fit
+# From the output, B1 = 1.198, B0 = 4.833. As a result the least squares equation
+# is mpg = 4.833 + 1.198 * acceleration
+
