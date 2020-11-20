@@ -1,0 +1,327 @@
+---
+title: "DAR Coursework 1"
+author: "Fara Johnson"
+date: "20/11/2020"
+output: html_document
+---
+
+```{r}
+data("Auto",package = "ISLR")
+```
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+#### 1. Statistical learning methods \hfill ($12\%\mid 12\%$)
+
+For each of parts (a) through (d), indicate whether we would generally expect the performance of a flexible statistical learning method to be better or worse than an inflexible method. Justify your answer. 
+
+(a) The number of predictors $p$ is extremely large, and the number of observations $n$ is small.
+
+```{}
+It is better to use an inflexible method because when n is small there is not enough data to fit a complex model for example we'd rather do best line of best fit compared to a polynomial of high degree.
+```
+
+(b) The sample size $n$ is extremely large, and the number of predictors $p$ is small.
+
+```{}
+It is better use a flexible (complex) method as we have enough samples to fit a complex model, without too much overfitting.
+```
+
+(c) The relationship between the predictors and response is highly non-linear.
+
+```{}
+Since the relationship is non-linear I believe a flexible method will perform better, by fitting data better and thus achieving a better MSE score.
+```
+
+(d) The standard deviation of the error terms, i.e. $\sigma = \textrm{sd}(\varepsilon)$, is extremely high.
+
+```{}
+A high variance on the test data would mean the model is overfitted and we better use a simpler inflexible method
+```
+\smallskip
+
+#### 2. Bayes' rule \hfill ($12\%\mid 12\%$)
+
+Given a dataset including 20 observations (S_1, ..., S_20) about the temperature (i.e. hot or cool) for playing golf (i.e. yes or no), you are required to use the Bayes' rule to calculate by hand the probability of playing golf according to the temperature, i.e. P(Play Golf | Temperature).
+
+
+|       | S_1 | S_2 | S_3 | S_4 | S_5 | S_6 | S_7 | S_8 | S_9 | S_10 |
+|-------|------|---------|--------|--------|--------|--------|--------|--------|--------|--------|
+|   Temperature |  cool  |    hot   |    hot  | hot  |cool  | cool  |hot  |cool  |hot  |hot  |
+|   Play Golf  |  yes |   no   |  yes  | no  | yes  | yes  | no  |yes  |no  |yes  |
+
+|       | S_11 | S_12 | S_13 | S_14 | S_15 | S_16 | S_17 | S_18 | S_19 | S_20 |
+|-------|------|---------|--------|--------|--------|--------|--------|--------|--------|--------|
+|   Temperature |  hot  |    hot   |    hot  | cool  |hot  | hot  |cool  |cool  |cool  |hot  |
+|   Play Golf  |  no |   no   |  yes  | no  | no  | no  | yes | no  |no  |no  |
+
+```{}
+P(A|B) = P(B|A) * P(A) / P(B)
+
+P(cool) = 8/20
+P(hot) = 12/20
+P(Golf) = 8/20
+P(¬Golf) = 12/20
+
+P(cool | golf) = 5/8
+P(cool | ¬golf) = 3/12
+P(hot | golf) = 3/8    
+P(hot | ¬golf) = 9/12   
+
+P(golf | cool) = p(cool|golf) * P(golf) / P(cool)
+0.625 * 0.4 / 0.4 = 0.625
+
+P(golf | hot) = P(hot|gold) * P(golf) / P(hot)
+0.375 * 0.4 / 0.6 = 0.25
+
+```
+
+#### 3. Descriptive analysis \hfill ($22\%\mid 22\%$)
+
+This question involves the ```Auto``` dataset included in the "ISLR" package.  
+
+(a) Which of the predictors are quantitative, and which are qualitative?
+
+```{}
+The coloumn 'name' and 'origin' are the only qualitative predictor
+```
+
+(b) What is the range of each quantitative predictor? You can answer this using the ```range()``` function.
+```{r}
+# Range of mpg
+rangeOfMpg <- range(Auto$mpg)
+
+# Range of Cylinders
+rangeOfCylinder <- range(Auto$cylinders)
+
+# Range of displacement
+rangeOfDisplacement <- range(Auto$displacement)
+
+# Range of horsepower
+rangeOfHorsepower <- range(Auto$horsepower)
+
+# Range of weight
+rangeOfWeight <- range(Auto$weight)
+
+# Range of acceleration
+rangeOfAccelerate <- range(Auto$acceleration)
+
+# Range of year
+rangeOfYear <- range(Auto$year)
+```
+
+(c) What is the median and variance of each quantitative
+predictor?
+```{r}
+# Median : Mpg
+mpgMedian <- median(Auto$mpg)
+
+# Median : Cylinders
+cylindersMedian <- median(Auto$cylinders)
+
+# Median : Displacement
+displacementMedian <- median(Auto$displacement)
+
+# Median : Horsepower
+horsepowerMedian <- median(Auto$horsepower)
+
+# Median : Weight
+weightMedian <- median(Auto$weight)
+
+# Median : Acceleration
+accelerateMedian <- median(Auto$accelerate)
+
+# Median : Year
+yearMedian <- median(Auto$year)
+
+# Calculating the variance
+
+# Variance : Mpg (unbiased)
+mpgVariance <- var(Auto$mpg)
+
+# Variance : Cylinders (unbiased)
+cylindersVariance <- var(Auto$cylinders)
+
+# Variance : Displacement (unbiased)
+displacementVariance <- var(Auto$displacement)
+
+# Variance : Horsepower
+horsepowerVariance <- var(Auto$horsepower)
+
+# Variance : Weight
+weightVariance <- var(Auto$weight)
+
+# Variance : Acceleration
+accelerateVariance <- var(Auto$acceleration)
+
+# Variance : Year
+yearVariance <- var(Auto$year)
+
+```
+(d) Now remove the 11th through 79th observations (inclusive) in the dataset. What is the
+range, median, and variance of each predictor in the
+subset of the data that remains?
+```{r}
+subsetAuto <- Auto[c(1:10, 80:392),]
+```
+
+```{r}
+subsetMpgRange <- range(subsetAuto$mpg)
+subsetMpgMedian <- median(subsetAuto$mpg)
+subsetMpgVariance <- var(subsetAuto$mpg)
+
+subsetCylindersRange <- range(subsetAuto$cylinders)
+subsetCylindersMedian <- median(subsetAuto$cylinders)
+subsetCylindersVariance <- var(subsetAuto$cylinders)
+
+subsetDisplacementRange <- range(subsetAuto$displacement)
+subsetDisplacementMedian <- median(subsetAuto$displacement)
+subsetDisplacementVariance <- var(subsetAuto$displacement)
+
+subsetHorsepowerRange <- range(subsetAuto$horsepower)
+subsetHorsepowerMedian <- median(subsetAuto$horsepower)
+subsetHorsepowerVariance <- var(subsetAuto$horsepower)
+
+subsetWeightRange <- range(subsetAuto$weight)
+subsetWeightMedian <- median(subsetAuto$weight)
+subsetWeightVariance <- var(subsetAuto$weight)
+
+subsetAccelerationRange <- range(subsetAuto$acceleration)
+subsetAccelerationMedian <- median(subsetAuto$acceleration)
+subsetAccelerationVariance <- var(subsetAuto$acceleration)
+
+subsetYearRange <- range(subsetAuto$year)
+subsetYearMedian <- median(subsetAuto$year)
+subsetYearVariance <- var(subsetAuto$year)
+
+```
+
+```{r}
+cat("Subset of Mpg range:" , subsetMpgRange)
+cat("Subset of Mpg median:" , subsetMpgMedian)
+cat("Subset of Mpg variance:" , subsetMpgVariance)
+
+cat("Subset of Cylinders range:" , subsetCylindersRange)
+cat("Subset of Cylinders median:" , subsetCylindersMedian)
+cat("Subset of Cylinders variance:" , subsetCylindersVariance)
+
+cat("Subset of Displacement range:" , subsetDisplacementRange)
+cat("Subset of Displacement median:" , subsetDisplacementMedian)
+cat("Subset of Displacement variance:" , subsetDisplacementVariance)
+
+cat("Subset of Horsepower range:" , subsetHorsepowerRange)
+cat("Subset of Horsepower median:" , subsetHorsepowerMedian)
+cat("Subset of Horsepower variance:" , subsetHorsepowerVariance)
+
+cat("Subset of Weight range:" , subsetWeightRange)
+cat("Subset of Weight median:" , subsetWeightMedian)
+cat("Subset of Weight variance:" , subsetWeightVariance)
+
+cat("Subset of Acceleration range:" , subsetAccelerationRange)
+cat("Subset of Acceleration median:" , subsetAccelerationMedian)
+cat("Subset of Acceleration variance:" , subsetAccelerationVariance)
+
+cat("Subset of Year range:" , subsetYearRange)
+cat("Subset of Year median:" , subsetYearMedian)
+cat("Subset of Year variance:" , subsetYearVariance)
+
+```
+(e) Using the full data set, investigate the relationship between individual predictors with the target response gas mileage (```mpg```) graphically. Comment on your findings.
+```{r}
+plot(Auto$cylinders, Auto$mpg, main="Scatterplot",pch=19)
+abline(lm(Auto$mpg~ Auto$cylinders), col="red")
+```
+
+```{r}
+plot(Auto$displacement, Auto$mpg, main="Scatterplot",pch=19)
+abline(lm(Auto$mpg~ Auto$displacement), col="red")
+```
+
+```{r}
+plot(Auto$horsepower, Auto$mpg, main="Scatterplot",pch=19)
+abline(lm(Auto$mpg~ Auto$horsepower), col="red")
+```
+
+```{r}
+plot(Auto$weight, Auto$mpg, main="Scatterplot",pch=19)
+abline(lm(Auto$mpg~ Auto$weight), col="red")
+```
+
+```{r}
+plot(Auto$acceleration, Auto$mpg, main="Scatterplot",pch=19)
+abline(lm(Auto$mpg~ Auto$acceleration), col="red")
+```
+
+```{r}
+plot(Auto$year, Auto$mpg, main="Scatterplot",pch=19)
+abline(lm(Auto$mpg~ Auto$year), col="red")
+```
+
+(f) Suppose that we wish to predict ```mpg``` on the basis
+of the other variables. Do your plots suggest that any of the
+other variables might be useful in predicting ```mpg```? Justify your answer.
+```{}
+```
+
+#### 4. Linear regression \hfill ($24\%\mid 24\%$)
+
+This question involves the use of simple linear regression on the ```Auto``` dataset.
+
+(a) Use the ```lm()``` function to perform a simple linear regression with
+`mpg` as the response and `acceleration` as the predictor. Use the
+```summary()``` function to print the results. Comment on the output. For example:
+```{r}
+lm.fit <- lm(mpg ~ acceleration, data=Auto)
+summary(lm.fit)
+```
+i. Is there a relationship between the predictor and the response?
+```{}
+From the output, B1 = 1.198, B0 = 4.833. As a result the least squares equation is 
+mpg = 4.833 + 1.198 * acceleration
+The p_value 2e-16 < 0.05 so ew can reject hypotheiss that the coefficient is 0
+```
+
+ii. How strong is the relationship between the predictor and
+the response?
+
+iii. Is the relationship between the predictor and the response
+positive or negative?
+
+```{}
+Positive relationship: 1.19
+```
+
+iv. What is the predicted ```mpg``` associated with an ```acceleration``` of
+14.50? What are the associated 97% confidence and prediction
+intervals?
+```{r}
+mpg_pred = predict(lm.fit,newdata=data.frame(acceleration=c(14.50)), interval="confidence", level=0.97)
+print("MPG prediction: ")
+print(mpg_pred)
+```
+
+(b) Plot the response and the predictor. Use the ```abline()``` function
+to display the least squares regression line.
+
+```{r}
+plot(Auto$acceleration, Auto$mpg)
+abline(lm.fit)
+```
+
+(c) Plot the 97% confidence interval and prediction interval in the same plot as (b) using different ```colours``` and legends. 
+
+```{r}
+acc <- data.frame(acceleration = seq(10,25,length = 100))
+conf <- predict (lm.fit, newdata = acc , interval="confidence", level=0.97)
+pred <- predict (lm.fit, newdata = acc , interval="prediction", level=0.97)
+
+plot(Auto$acceleration, Auto$mpg)
+abline(lm.fit)
+
+lines(acc$acceleration, pred[,"upr"], col="blue", type="b", pch="*")
+lines(acc$acceleration, pred[,"lwr"], col="blue", type="b", pch="*")
+lines(acc$acceleration, conf[,"upr"], col="red", type="b", pch="+")
+lines(acc$acceleration, conf[,"lwr"], col="red", type="b", pch="+")
+```
+
